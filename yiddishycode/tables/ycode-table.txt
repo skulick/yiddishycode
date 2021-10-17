@@ -1,0 +1,53 @@
+;; B = b + @  beys with dagesh
+;; ~ = b + ^  beys with rafe - Hebrew
+;; U = v + @  vov with dagesh - melupm vov
+;; Z = V + @  double-vov plus dagesh - not a valid combination
+;; L = k + @  khof with dagesh -Hebrew
+;; Q = k + ^  khof with rafeh -unknown character
+;; p = & + @  bare_fey with dagesh - pey
+;; f = & + ^  bare_fey  with rafe - fey
+;; G = T + @  sof with dagesh, tof - Hebrew
+;;
+;; not using I = y + hiriq(i) khirek yud
+;; not using J = Y + hiriq(i) pasekh tsvey yudn
+;;
+\	1456	0x5b0	HEBREW POINT SHEVA	twodotsvertical
+i	1460	0x5b4	HEBREW POINT HIRIQ
+{	1461	0x5b5	HEBREW POINT TSERE	twodotshorizontal
+}	1462	0x5b6	HEBREW POINT SEGOL	threedotstriangle
+a	1463	0x5b7	HEBREW POINT PATAH	pasekh
+o	1464	0x5b8	HEBREW POINT QAMATS	komets
+@	1468	0x5bc	HEBREW POINT DAGESH OR MAPIQ
+^	1471	0x5bf	HEBREW POINT RAFE
+#	1474	0x5c2	HEBREW POINT SIN DOT
+A	1488	0x5d0	HEBREW LETTER ALEF	alef
+b	1489	0x5d1	HEBREW LETTER BET	beys
+g	1490	0x5d2	HEBREW LETTER GIMEL	gimel
+d	1491	0x5d3	HEBREW LETTER DALET	daled
+h	1492	0x5d4	HEBREW LETTER HE	hey
+v	1493	0x5d5	HEBREW LETTER VAV	vov
+z	1494	0x5d6	HEBREW LETTER ZAYIN	zayen
+H	1495	0x5d7	HEBREW LETTER HET	khes(Hebrew)
+t	1496	0x5d8	HEBREW LETTER TET	tes
+y	1497	0x5d9	HEBREW LETTER YOD	yud
+K	1498	0x5da	HEBREW LETTER FINAL KAF	khof
+k	1499	0x5db	HEBREW LETTER KAF	khof
+;; k is a bad choice.  should change this to * or x or something
+l	1500	0x5dc	HEBREW LETTER LAMED	lamed
+M	1501	0x5dd	HEBREW LETTER FINAL MEM	mem
+m	1502	0x5de	HEBREW LETTER MEM	mem
+N	1503	0x5df	HEBREW LETTER FINAL NUN	nun
+n	1504	0x5e0	HEBREW LETTER NUN	nun
+s	1505	0x5e1	HEBREW LETTER SAMEKH	samekh
+e	1506	0x5e2	HEBREW LETTER AYIN	ayen
+F	1507	0x5e3	HEBREW LETTER FINAL PE	fey
+&	1508	0x5e4	HEBREW LETTER PE	bare_fey
+X	1509	0x5e5	HEBREW LETTER FINAL TSADI	tsadek
+x	1510	0x5e6	HEBREW LETTER TSADI	tsadek
+q	1511	0x5e7	HEBREW LETTER QOF	kuf
+r	1512	0x5e8	HEBREW LETTER RESH	reysh
+$	1513	0x5e9	HEBREW LETTER SHIN	shin
+T	1514	0x5ea	HEBREW LETTER TAV	sof(Hebrew)
+V	1520	0x5f0	HEBREW LIGATURE YIDDISH DOUBLE VAV
+W	1521	0x5f1	HEBREW LIGATURE YIDDISH VAV YOD
+Y	1522	0x5f2	HEBREW LIGATURE YIDDISH DOUBLE YOD
