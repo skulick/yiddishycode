@@ -3,7 +3,8 @@ from yiddishycode.translit import Transliterator
 
 def main():
     transliterator = Transliterator()    
-    with open('tests/test-words.txt', 'r', encoding='utf-8') as fin:
+    #with open('tests/test-words.txt', 'r', encoding='utf-8') as fin:
+    with open('tests/words2.txt', 'r', encoding='utf-8') as fin:        
         lines = fin.readlines()
     words = [line.strip() for line in lines]
     for word in words:

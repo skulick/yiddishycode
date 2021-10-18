@@ -9,29 +9,21 @@ COMBINATIONS = [
     ('ba@', 'Ba'),
     ('bo@', 'Bo'),
 
-    # beys with dagesh = B
+    # dagesh
     ('b@', 'B'),
-    # beys with rafe = ~
-    ('b^', '~'),
-
-    # vov with dagesh = U
     ('v@', 'U'),
-    # double vov with dagesh = Z
-    # not really a letter
+    ('&@', 'p'),
+    ('x@', 'K'),
+    ('S@', 'T'),
     ('V@', 'Z'),
 
-    # khof with dagesh = L (kof)
-    ('k@', 'L'),
-    # khof with rafe = Q  (unknown character)
-    ('k^', 'Q'),
-
-    # bare_fey with dagesh = p
-    ('&@', 'p'),
-    # bare_fey with rafe = fey
+    # rafe
+    ('b^', '~'),
     ('&^', 'f'),
+    ('x^', 'R'),
 
-    # sof with dagesh = G (sof)
-    ('T@', 'G'),
+    # sin dot
+    ('$#', 'C')
     ]
 
 def read_trans_table():
@@ -41,9 +33,9 @@ def read_trans_table():
     with pkg_resources.open_text(tables, 'ycode-table.txt') as fin:
         lines2 = fin.readlines()
     lines = lines1 + lines2
-    
-    lines = [line.rstrip().split('\t') for line in lines
-             if not line.startswith(';;')]
+    lines = [line.rstrip() for line in lines]
+    lines = [line.split('\t') for line in lines
+             if line and not line.startswith(';;')]
 
     ycode_chars = [line[0].strip() for line in lines]
     for one in ycode_chars:
