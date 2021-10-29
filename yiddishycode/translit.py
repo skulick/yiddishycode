@@ -94,6 +94,29 @@ class Transliterator:
         return yiddish_text
 
     def yivo2ycode(self, yivo_text):
+        """Convert text in yivo transliteration to ycode
+
+        It iterates through string looking for two-letter combinations
+        first, and if not then mapping the current letter.  
+
+        This could be made more efficient by first mapping two-letter
+        combinations throughout the string and then mapping remaining letters.
+        A problem with this is that there is then confusion arises
+        with whether letters are already mapped.  e.g. if ay is mapped to
+        Ya, then the a shouldn't get mapped again.  
+
+        After the mapping is done, final letters are fixed up, and
+        the leading shtumer alef is added if necessary.  This is added in the
+        cases of:
+        W vov yud
+        Y double yud
+        or if starts with vowel i or u. We don't know this just by looking
+        at the first character, since 'y' can be vowel or consonant
+        however if it's v then it was a u
+
+        TODO: use translate
+        """
+        yivo_text = yivo_text.replace('_', '')
         ycode_text = ''
         yivo_x = 0
         while yivo_x < len(yivo_text) - 1:
@@ -120,9 +143,14 @@ class Transliterator:
                 print(f'unknown character {chr1} {yivo_x}')
                 ycode_text += chr1
                 yivo_x += 1
-                
+
+        # fix up final letter
         chr1 = ycode_text[-1]
-        if chr1 in ('xmnfq'):
+        if chr1 in 'xmnfq':
             chr1u = chr1.upper()
             ycode_text = ycode_text[:-1] + chr1u
+
+        # add shtumer alef if necessary
+        if ycode_text[0] in 'yYv' or yivo_text[0] == 'i':
+            ycode_text = 'A' + ycode_text
         return ycode_text
