@@ -1,0 +1,51 @@
+;; ambiguous
+;;
+;; v -> ~   veys, in words of Hebrew origin
+;; v -> V   double vov
+;;
+;; kh -> H  khes, in words of Hebrew origin
+;; kh -> x  kohf
+;;
+;; k -> K   kof, in words of Hebrew origin
+;; k -> k   kuf
+;;
+;; s -> S   sof, in words of Hebrew origin
+;; s -> C   sin, in words of Hebrew origin
+;; s -> s   samekh
+
+;; t -> T   tof, in words of Hebrew origin
+;; t -> t   tes
+;;
+;; u -> v   vov
+;; u -> U   melupm vov (v+@)
+
+
+a	Aa
+o	Ao
+b	b
+g	g
+d	d
+h	h
+u	v
+z	z
+t	t
+y	y
+i	y
+kh	x
+l	l
+m	m
+n	n
+s	s
+e	e
+f	f
+p	p
+ts	q
+k	k
+r	r
+sh	$
+;; letter combinations
+v	V
+zh	z$
+oy	W
+ey	Y
+ay	Ya

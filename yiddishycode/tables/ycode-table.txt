@@ -1,10 +1,6 @@
 ;; Letters in Yiddish alphabet without
 ;; hiriq, pasekh, komets, dagesh, rafe, sin dot
-
-;; A is shtumer alef, withotu pasekh or komets
-;; H and S are only in words of Hebrew origin
-;; & is called PE but it is the p/f for without either the rafe
-;; (which makes it fey) or dagesh (which makes it pey)
+;; which are listed further below.
 
 A	1488	0x5d0	HEBREW LETTER ALEF	alef
 b	1489	0x5d1	HEBREW LETTER BET	beys
@@ -27,19 +23,22 @@ s	1505	0x5e1	HEBREW LETTER SAMEKH	samekh
 e	1506	0x5e2	HEBREW LETTER AYIN	ayen
 F	1507	0x5e3	HEBREW LETTER FINAL PE	fey
 &	1508	0x5e4	HEBREW LETTER PE	bare_fey
-q	1509	0x5e5	HEBREW LETTER FINAL TSADI	tsadek
-Q	1510	0x5e6	HEBREW LETTER TSADI	tsadek
+Q	1509	0x5e5	HEBREW LETTER FINAL TSADI	tsadek
+q	1510	0x5e6	HEBREW LETTER TSADI	tsadek
 k	1511	0x5e7	HEBREW LETTER QOF	kuf
 r	1512	0x5e8	HEBREW LETTER RESH	reysh
 $	1513	0x5e9	HEBREW LETTER SHIN	shin
 S	1514	0x5ea	HEBREW LETTER TAV	sof(Hebrew)
+
+;; Unicode characters representing two Yiddish characters,
+;; usually considered to be a single character.  
 V	1520	0x5f0	HEBREW LIGATURE YIDDISH DOUBLE VAV
 W	1521	0x5f1	HEBREW LIGATURE YIDDISH VAV YOD
 Y	1522	0x5f2	HEBREW LIGATURE YIDDISH DOUBLE YOD
 
 ;; hiriq, pasekh, komets, dagesh, rafe, sin dot
 ;; these are the diactritics used with Yiddish letters
-;; (or for #, to make a Hebrew character used in Yiddish words
+;; (or for 0x5c2, to make a Hebrew character used in Yiddish words
 ;; of Hebrew origin)
 ;; dagesh and rafe are combined with other characters to make new characters
 ;; hiriq, pasekh, kometz, sin dot are not
@@ -83,3 +82,6 @@ o	1464	0x5b8	HEBREW POINT QAMATS	komets
 \	1456	0x5b0	HEBREW POINT SHEVA	twodotsvertical
 {	1461	0x5b5	HEBREW POINT TSERE	twodotshorizontal
 }	1462	0x5b6	HEBREW POINT SEGOL	threedotstriangle
+
+
+
