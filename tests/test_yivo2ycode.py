@@ -5,7 +5,8 @@ def main():
     transliterator = Transliterator()
     x = 1
     for yivo_text in [
-            'vos', 'shoyn', 'ingantsn', 'azoy']:
+            'vos', 'shoyn', 'ingantsn', 'azoy', 'kontshn', 'yerushe',
+            'oysgekratst', 'yerushe', 'nadn', 'avrom-yankev']:
         ycode_text = transliterator.yivo2ycode(yivo_text)
         print(f'{yivo_text} -> {ycode_text}')
 

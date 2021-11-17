@@ -31,7 +31,6 @@ z	z
 t	t
 y	y
 i	y
-kh	x
 l	l
 m	m
 n	n
@@ -39,16 +38,19 @@ s	s
 e	e
 f	f
 p	p
-ts	q
 k	k
 r	r
-sh	$
-;; letter combinations
 v	V
-zh	z$
-oy	W
-ey	Y
-ay	Ya
+
+;; letter combinations
+tsh	8224	t$
+zh	8225	z$
+oy	8226	W
+ey	8227	Y
+ay	8228	Ya
+sh	8229	$
+kh	8330	x
+ts	8331	q
 
 ;; ascii
 !	!

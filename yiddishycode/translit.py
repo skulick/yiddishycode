@@ -26,6 +26,17 @@ COMBINATIONS = [
     ('$#', 'C')
     ]
 
+def read_hebrew():
+    """Reads table of non-phonetic words"""
+    with pkg_resources.open_text(tables, 'hebrew_translit.txt') as fin:
+        lines = fin.readlines()
+    lines = [line.rstrip() for line in lines]
+    lines = [line.split('\t') for line in lines
+             if line and not line.startswith(';;')]
+    yivo2hebrew = {yivo.strip():hebrew.strip() for
+                   (yivo, hebrew) in lines}
+    return yivo2hebrew
+
 def read_trans_table():
     """Reads tables and makes 1-1 translation lists"""
     with pkg_resources.open_text(tables, 'ycode-table-ascii.txt') as fin:
@@ -46,7 +57,7 @@ def read_trans_table():
 
     return (ycode_chars, yiddish_chars)
 
-def read_yivo2ycode_table():
+def read_yivo2ycode_table_old():
     with pkg_resources.open_text(tables, 'yivo-ycode.txt') as fin:
         lines = fin.readlines()
 
@@ -64,6 +75,31 @@ def read_yivo2ycode_table():
                   if len(yivo_char) == 2}
     return (yivo2ycode_1, yivo2ycode_2)
 
+def read_yivo2ycode_table():
+    with pkg_resources.open_text(tables, 'yivo-ycode.txt') as fin:
+        lines = fin.readlines()
+
+    lines = [line.rstrip() for line in lines]
+    lines = [line.split('\t') for line in lines
+             if line and not line.startswith(';;')]
+
+    simple = [line for line in lines
+              if len(line) == 2]
+    complex_ = [line for line in lines
+              if len(line) == 3]
+
+    yivo_chars = [line[0].strip() for line in simple]
+    ycode_chars = [line[1].strip() for line in simple]
+    yivo2ycode_1 = {yivo_char: ycode_char
+                    for (yivo_char, ycode_char) in zip(yivo_chars, ycode_chars)
+                    if len(yivo_char) == 1}
+
+    yivo2ycode_2 = [(yivo_cluster, chr(int(tmp)), ycode_cluster)
+                    for (yivo_cluster, tmp, ycode_cluster) in complex_]
+
+    return (yivo2ycode_1, yivo2ycode_2)
+
+
 
 class Transliterator:
     def __init__(self):
@@ -75,6 +111,7 @@ class Transliterator:
         self.trans_ycode2yiddish = str.maketrans(
             ycode_str, yiddish_str)
         (self.yivo2ycode_1, self.yivo2ycode_2) = read_yivo2ycode_table()
+        self.yivo2hebrew = read_hebrew()
 
 
     def yiddish2ycode(self, yiddish_text):
@@ -94,16 +131,33 @@ class Transliterator:
         return yiddish_text
 
     def yivo2ycode(self, yivo_text):
+        if yivo_text in ('-', '--', '---', '----'):
+            return yivo_text
+
+        # first check if have combined entry in hebrew
+        if yivo_text in self.yivo2hebrew:
+            return self.yivo2hebrew[yivo_text]
+        
+        yivo_words = yivo_text.split("-")
+        if len(yivo_words) == 1:
+            ycode = self.yivo2ycode_single(yivo_text)
+            return ycode
+        ycode_words = [self.yivo2ycode_single(yivo_word)
+                       for yivo_word in yivo_words]
+        ycode = "-".join(ycode_words)
+        return ycode
+
+    def yivo2ycode_single(self, yivo_text):
         """Convert text in yivo transliteration to ycode
 
         It iterates through string looking for two-letter combinations
-        first, and if not then mapping the current letter.  
+        first, and if not then mapping the current letter.
 
         This could be made more efficient by first mapping two-letter
         combinations throughout the string and then mapping remaining letters.
         A problem with this is that there is then confusion arises
         with whether letters are already mapped.  e.g. if ay is mapped to
-        Ya, then the a shouldn't get mapped again.  
+        Ya, then the a shouldn't get mapped again.
 
         After the mapping is done, final letters are fixed up, and
         the leading shtumer alef is added if necessary.  This is added in the
@@ -116,33 +170,33 @@ class Transliterator:
 
         TODO: use translate
         """
-        yivo_text = yivo_text.replace('_', '')
+        #yivo_text = yivo_text.replace('_', '')
+        if yivo_text in self.yivo2hebrew:
+            return self.yivo2hebrew[yivo_text]
+
+        # could do a more principled check for  has i or u
+        # following apostrophe as well but easier to just check
+        # for particular cases
+        if yivo_text == "s'iz":
+            return "s'Ayz"
+        if yivo_text == "s'i'":
+            return "s'Ay'"
+        if yivo_text == "i'":
+            return "Ay'"
+
+
+        for (yivo_cluster, tmp, ycode_cluster) in self.yivo2ycode_2:
+            yivo_text = yivo_text.replace(yivo_cluster, tmp)
+
         ycode_text = ''
-        yivo_x = 0
-        while yivo_x < len(yivo_text) - 1:
-            chr1 = yivo_text[yivo_x]
-            chr2 = yivo_text[yivo_x+1]
-            chr12 = chr1 + chr2
-            if chr12 in self.yivo2ycode_2:
-                ycode_text += self.yivo2ycode_2[chr12]
-                yivo_x += 2
-            elif chr1 in self.yivo2ycode_1:
+        for chr1 in yivo_text:
+            if  chr1 in self.yivo2ycode_1:
                 ycode_text += self.yivo2ycode_1[chr1]
-                yivo_x += 1
             else:
-                print(f'unknown character {chr1}')
                 ycode_text += chr1
-                yivo_x += 1
-                
-        if yivo_x < len(yivo_text):
-            chr1 = yivo_text[yivo_x]
-            if chr1 in self.yivo2ycode_1:
-                ycode_text += self.yivo2ycode_1[chr1]
-                yivo_x += 1
-            else:
-                print(f'unknown character {chr1} {yivo_x}')
-                ycode_text += chr1
-                yivo_x += 1
+
+        for (yivo_cluster, tmp, ycode_cluster) in self.yivo2ycode_2:
+            ycode_text = ycode_text.replace(tmp, ycode_cluster)
 
         # fix up final letter
         chr1 = ycode_text[-1]
@@ -151,6 +205,15 @@ class Transliterator:
             ycode_text = ycode_text[:-1] + chr1u
 
         # add shtumer alef if necessary
-        if ycode_text[0] in 'yYv' or yivo_text[0] == 'i':
+
+        ycode0 = ycode_text[0]
+        yivo0 = yivo_text[0]
+        # don't need to check ycode0 if yivo0 is i or u
+        # keeping it for clarity for now
+        if ((ycode0 == 'y' and yivo0 == 'i') or
+            (ycode0 == 'v' and yivo0 == 'u') or
+            ycode0 in 'WY'):
             ycode_text = 'A' + ycode_text
+
+
         return ycode_text
