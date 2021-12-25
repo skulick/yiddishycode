@@ -134,16 +134,23 @@ class Transliterator:
         if yivo_text in ('-', '--', '---', '----'):
             return yivo_text
 
+        if yivo_text == '%EXCL%':
+            return '!'
+
+        yivo_text = yivo_text.replace('~', '')        
+
         # first check if have combined entry in hebrew
         if yivo_text in self.yivo2hebrew:
             return self.yivo2hebrew[yivo_text]
         
         yivo_words = yivo_text.split("-")
+        # some words seem to end in a hyphen, so there could be an empty word
         if len(yivo_words) == 1:
             ycode = self.yivo2ycode_single(yivo_text)
             return ycode
         ycode_words = [self.yivo2ycode_single(yivo_word)
-                       for yivo_word in yivo_words]
+                       for yivo_word in yivo_words
+                       if yivo_word]
         ycode = "-".join(ycode_words)
         return ycode
 
