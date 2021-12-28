@@ -2,7 +2,7 @@
 import importlib.resources as pkg_resources
 from . import tables
 
-def read_hebrew():
+def read_nonphonetic():
     """Reads table of non-phonetic words
 
     The input file consists of two columns. The first is the phonetic yivo
@@ -16,7 +16,7 @@ def read_hebrew():
         key: yivo word
         vall: corresponding ycode word
     """
-    with pkg_resources.open_text(tables, 'hebrew_translit.txt') as fin:
+    with pkg_resources.open_text(tables, 'nonphonetic_yivo2ycode.txt') as fin:
         lines = fin.readlines()
     lines = [line.rstrip() for line in lines]
     lines = [line.split('\t') for line in lines
@@ -82,9 +82,9 @@ class TransliteratorYivo:
     """Handles transliteration of yivo -> ycode"""
     def __init__(self):
         (self.yivo2ycode_1, self.yivo2ycode_2) = read_yivo2ycode_table()
-        self.yivo2hebrew = read_hebrew()
+        self.yivo2hebrew = read_nonphonetic()
 
-    def yivo2ycode(self, yivo_text):
+    def yivo2ycode(self, yivo_text, use_nonphonetic=True):
         """Convert string in yivo transliteration to ycode
 
         (0) First removes ~ which is assumed to not occur in yivo
@@ -115,7 +115,7 @@ class TransliteratorYivo:
             return "Ay'"
 
         # (2)
-        if yivo_text in self.yivo2hebrew:
+        if use_nonphonetic and yivo_text in self.yivo2hebrew:
             return self.yivo2hebrew[yivo_text]
 
         # (3)
