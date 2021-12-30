@@ -1,5 +1,5 @@
 afile	Aafylv
-efsher	A~$r
+efsher	Af$r
 beemes	bAmS
 beys	beS
 bas	bS
@@ -16,6 +16,7 @@ goyver	gv~r
 khorev	Hrv~
 khasene	HSvnh
 mevatl	m~tl
+megulgl	mgvlgl
 madrekh	mdryX
 moykhl	mvHl
 moyre	mvrA
@@ -105,9 +106,9 @@ tayne	tenh
 taynes	tenvS
 yedie	ydyeh
 yedies	ydyevS
-yires-hakoved	yirAS-hK~vd
-yishev	yi$v~
-yishuvim	yi$v~yM
+yires-hakoved	yyirAS-hK~vd
+yishev	yyi$v~
+yishuvim	yyi$v~yM
 yerushe	yrv$h
 yerushes	yrv$vS
 yosem	ySvM

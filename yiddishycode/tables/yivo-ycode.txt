@@ -51,6 +51,7 @@ ay	8228	Ya
 sh	8229	$
 kh	8330	x
 ts	8331	q
+yi	8332	yyi
 
 ;; ascii
 !	!
