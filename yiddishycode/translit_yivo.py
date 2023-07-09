@@ -144,6 +144,13 @@ class TransliteratorYivo:
         if yivo_text in self.yivo2hebrew:
             return self.yivo2hebrew[yivo_text]
 
+        # hack for internal i after oys, etc.
+        if yivo_text.startswith('oysi'):
+            yivo_text = 'oysAi' + yivo_text[4:]
+        elif yivo_text.startswith('oysgei'):
+            yivo_text = 'oysgeAi' + yivo_text[6:]
+        
+
         # (1)
         for (yivo_cluster, tmp, ycode_cluster) in self.yivo2ycode_2:
             yivo_text = yivo_text.replace(yivo_cluster, tmp)

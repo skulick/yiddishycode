@@ -19,7 +19,7 @@
 ;; u -> v   vov
 ;; u -> U   melupm vov (v+@)
 
-
+A	A
 a	Aa
 o	Ao
 b	b
@@ -52,6 +52,7 @@ sh	8229	$
 kh	8330	x
 ts	8331	q
 yi	8332	yyi
+vu	8333	VU
 
 ;; ascii
 !	!
