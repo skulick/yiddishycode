@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
         setuptools.setup(
                 name="yiddishycode",
-                version="0.9",
+                version="0.1",
                 description="yiddish transliteration",
                 long_description=long_description,
                 long_description_content_type="text/markdown",
@@ -16,6 +16,7 @@ with open("README.md", "r") as fh:
                 author="Seth Kulick",
                 author_email="skulick@ldc.upenn.edu",
                 packages=setuptools.find_packages(),
+                include_package_data=True,
                 python_requires='>=3.7',
             )
 
