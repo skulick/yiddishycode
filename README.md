@@ -20,16 +20,27 @@ pip install .
 ## Example
 
 ```
+>>> from yiddishycode.translit import Transliterator
 from yiddishycode.translit import Transliterator
-translit = Transliterator()
-asc = translit.yiddish2ycode('⁧מחבר')⁩
+>>> translit = Transliterator()
+>>> word = 'מחבר'
+>>> word[0] == 'מ'
+True
+>>> asc = translit.yiddish2ycode(word)
+>>> print(asc)
+mHbr
+>>> word2 = translit.ycode2yiddish(asc)
+>>> print(word2)
+מחבר
+>>> word == word2
+word == word2
+True
 ```
 
 ## Usage notes
 This code will only work with Yiddish script in the NFC or NFD normalization.  
 
-
-
+The primary goal of the transliteration is to allow the 1-1 encoding, not necessarily to be readable. However, for the most part we followed typical QWERTY conventions for the Hebrew/Yiddish characters.  We then reached the probelm of running out of simple ascii characters, and adopted some conventions, such as capital letters for the final forms.  See the final `ycode-table.txt` for complete details.  
 
 ## Citation
 
