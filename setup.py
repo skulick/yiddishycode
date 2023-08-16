@@ -1,11 +1,13 @@
 import setuptools
+import yiddishycode
+
 
 with open("README.md", "r") as fh:
         long_description = fh.read()
 
         setuptools.setup(
                 name="yiddishycode",
-                version="0.1",
+                version=yiddishycode.__version__,
                 description="yiddish transliteration",
                 long_description=long_description,
                 long_description_content_type="text/markdown",
